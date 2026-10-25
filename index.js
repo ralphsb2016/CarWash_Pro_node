@@ -1,9 +1,10 @@
-const express = require ("express");
-const server = express();
-const port = 3000;
 
-server.listen(port, () =>{
+import server from "./app/server.js";
 
-  console.log(`el servidor esta corriendo en el puerto`, port);
+
+
+server.listen(server.get("port"), () =>{
+
+  console.log(`el servidor esta corriendo en el puerto`, server.get("port"));
 
 } );

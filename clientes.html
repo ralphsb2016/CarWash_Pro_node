@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarWash Pro - Clientes</title>
+    <style>
+        /* ===== RESET Y ESTILOS GENERALES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* ===== CONTENEDOR PRINCIPAL ===== */
+        .app-container {
+            width: 1000px;
+            max-width: 100%;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* ===== ENCABEZADO ===== */
+        .header {
+            background-color: #1a2a3a;
+            color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+            font-weight: bold;
+            color: #1a2a3a;
+        }
+
+        .header-left h1 {
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .user-icon {
+            width: 28px;
+            height: 28px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #1a2a3a;
+            font-size: 14px;
+        }
+
+        /* ===== CUERPO PRINCIPAL ===== */
+        .main-body {
+            display: flex;
+            min-height: 500px;
+        }
+
+        /* ===== MENÚ LATERAL ===== */
+        .sidebar {
+            width: 200px;
+            background-color: #f8f9fa;
+            border-right: 1px solid #e0e0e0;
+            padding-top: 20px;
+            flex-shrink: 0;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 20px;
+            font-size: 15px;
+            color: #333333;
+            cursor: pointer;
+            gap: 12px;
+            transition: background-color 0.2s;
+        }
+
+        .sidebar-item:hover {
+            background-color: #e9ecef;
+        }
+
+        .sidebar-item.active {
+            background-color: #1a2a3a;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .sidebar-item .icon {
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+
+        /* ===== ÁREA DE CONTENIDO ===== */
+        .content {
+            flex: 1;
+            padding: 30px;
+            background-color: #ffffff;
+        }
+
+        /* ----- Barra de búsqueda y botón ----- */
+        .top-bar {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            background-color: #f8f9fa;
+            border: 1px solid #d0d0d0;
+            border-radius: 6px;
+            padding: 10px 15px;
+            gap: 10px;
+        }
+
+        .search-box .search-icon {
+            font-size: 16px;
+            color: #888888;
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 14px;
+            color: #333333;
+            width: 100%;
+        }
+
+        .search-box input::placeholder {
+            color: #aaaaaa;
+        }
+
+        .btn-nuevo {
+            background-color: #4caf50;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-nuevo:hover {
+            background-color: #43a047;
+        }
+
+        /* ----- Tabla de clientes ----- */
+        .clientes-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .clientes-table thead {
+            background-color: #f1f3f5;
+        }
+
+        .clientes-table th {
+            text-align: left;
+            padding: 14px 18px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333333;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .clientes-table td {
+            padding: 14px 18px;
+            font-size: 14px;
+            color: #444444;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .clientes-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .clientes-table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+
+        <!-- ===== ENCABEZADO ===== -->
+        <header class="header">
+            <div class="header-left">
+                <div class="logo-icon">LOGO</div>
+                <h1>CarWash Pro</h1>
+            </div>
+            <div class="header-right">
+                <div class="user-icon">👤</div>
+                <span>Laura Gomez - Cajero</span>
+            </div>
+        </header>
+
+        <!-- ===== CUERPO PRINCIPAL ===== -->
+        <div class="main-body">
+
+            <!-- ===== MENÚ LATERAL ===== -->
+            <nav class="sidebar">
+                <div class="sidebar-item">
+                    <span class="icon">💲</span> Ventas
+                </div>
+                <div class="sidebar-item active">
+                    <span class="icon">👤</span> Clientes
+                </div>
+                <div class="sidebar-item">
+                    <span class="icon">📅</span> Agenda
+                </div>
+                <div class="sidebar-item">
+                    <span class="icon">🕐</span> Historial
+                </div>
+            </nav>
+
+            <!-- ===== CONTENIDO ===== -->
+            <div class="content">
+
+                <!-- Barra superior: buscador y botón -->
+                <div class="top-bar">
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" placeholder="Buscar por nombre, telefono o placa">
+                    </div>
+                    <button class="btn-nuevo">
+                        <span>+</span> Nuevo cliente
+                    </button>
+                </div>
+
+                <!-- Tabla de clientes -->
+                <table class="clientes-table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Telefono</th>
+                            <th>Vehiculos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Juan Perez</td>
+                            <td>3001234567</td>
+                            <td>ABC123</td>
+                        </tr>
+                        <tr>
+                            <td>Maria Rodriguez</td>
+                            <td>3109876543</td>
+                            <td>XYZ789</td>
+                        </tr>
+                        <tr>
+                            <td>Carlos Ramirez</td>
+                            <td>3157654321</td>
+                            <td>JKL456, MNO321</td>
+                        </tr>
+                        <tr>
+                            <td>Ana Torres</td>
+                            <td>3204561237</td>
+                            <td>DEF852</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
